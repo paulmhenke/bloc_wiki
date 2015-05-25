@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   root to: 'static_pages#index'
 
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
   resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
