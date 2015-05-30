@@ -2,13 +2,14 @@
 <html>
 <head>
   <title>Bloc Wiki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container">
-    <div id="user_header">
+  <div class="container">
+  <div class="pull-right user-info">
       <% if current_user %>
         Logged in as <%= current_user.name %> |
         <%= link_to "Log Out", logout_path%>
@@ -16,14 +17,26 @@
         <%= link_to "Sign Up", signup_path %> or
         <%= link_to "Log In", login_path %>
       <% end %>
-    </div>
-    
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-    <% end %>
-  
-    <%= yield %>
   </div>
+  </div>
+    <% if flash[:notice] %>
+         <div class="alert alert-success">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+       <% elsif flash[:error] %>
+         <div class="alert alert-danger">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:error] %>
+         </div>
+       <% elsif flash[:alert] %>
+         <div class="alert alert-warning">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+           <%= flash[:alert] %>
+         </div>
+    <% end %>
+    
+<%= yield %>
 
 </body>
 </html>
