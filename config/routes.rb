@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'wikis/index'
+
+  get 'wikis/show'
+
+  get 'wikis/new'
+
+  get 'wikis/edit'
+
   #get 'password_resets/new'
 
   get 'signup', to: 'users#new', as: 'signup'
