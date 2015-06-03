@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
+  #get 'password_resets/new'
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   before_create :confirmation_token
+  has_many :wikis
     
   validates_uniqueness_of :email 
   validates_format_of :email, :with => /@/
