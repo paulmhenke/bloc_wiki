@@ -7,13 +7,13 @@ Rails.application.routes.draw do
 
   get 'wikis/edit'
 
-  #get 'password_resets/new'
+  get 'password_resets/new'
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  root to: 'static_pages#index'
+  root to: 'static_pages#welcome'
 
   resources :users do
     member do
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :password_resets
+  resources :wikis
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
