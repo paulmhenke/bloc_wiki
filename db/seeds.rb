@@ -1,7 +1,6 @@
 require 'faker'
 
 member = User.create!(name: "Member User", email: "member@example.com", password: "helloworld", email_confirmed: true)
-
 member.save!   
     
 10.times do

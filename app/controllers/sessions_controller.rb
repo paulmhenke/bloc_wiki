@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         if user.email_confirmed
           session[:user_id] = user.id
           flash[:notice] = "You have logged in!"
-          redirect_to wikis_index_path
+          redirect_to wikis_path
         else
           flash[:notice] = 'Please activate your account by following the 
           instructions in the account confirmation email you received to proceed'
