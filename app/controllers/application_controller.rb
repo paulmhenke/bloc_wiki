@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to root_url, alert: exeption.message
+  end
+  
 
 protected 
   
@@ -12,7 +16,7 @@ protected
   end
   helper_method :current_user
   
-  def authorize
-    redirect_to login_url, alert: "Please Log In" if current_user.nil?
-  end
+  #def authorize
+    #redirect_to login_url, alert: "Please Log In" if current_user.nil?
+  #end
 end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /@/
   validates :password, length: { minimum: 8 }
   
+  after_initialize :set_role
+  
   def admin?
     role == 'admin'
   end
@@ -17,6 +19,10 @@ class User < ActiveRecord::Base
   
   def premium?
     role == 'premium'
+  end
+  
+  def set_role
+    self.role ||= 'standard'
   end
   
   def email_activate
