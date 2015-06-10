@@ -7,6 +7,18 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /@/
   validates :password, length: { minimum: 8 }
   
+  def admin?
+    role == 'admin'
+  end
+  
+  def standard?
+    role == 'standard'
+  end
+  
+  def premium?
+    role == 'premium'
+  end
+  
   def email_activate
     self.email_confirmed = true
     self.confirm_token = nil

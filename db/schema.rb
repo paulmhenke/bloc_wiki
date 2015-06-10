@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603173955) do
+ActiveRecord::Schema.define(version: 20150610020508) do
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150603173955) do
     t.string   "confirm_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "role"
   end
 
   create_table "wikis", force: true do |t|
