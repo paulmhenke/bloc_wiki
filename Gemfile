@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'figaro', '1.0'
+gem 'stripe'
 gem 'pundit'
 gem 'faker'
 gem 'bootstrap-sass'
