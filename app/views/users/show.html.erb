@@ -10,6 +10,10 @@
   </div>
   
   <div class='col-md-4'>
-    <%= link_to "Upgrade your Account", new_charge_path, class: 'btn btn-success' %>
+    <% if @user.role == "standard" %>
+      <%= link_to "Upgrade your Account", new_charge_path, class: 'btn btn-success' %>
+    <% else %>
+      <%= link_to "Cancel Premium Access", new_charge_path, class: 'btn btn-danger' %>
+    <% end %>
   </div>
 </div>
