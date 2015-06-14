@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
+  AMOUNT = 20_00
   has_secure_password
   before_create :confirmation_token
   has_many :wikis
     
   validates_uniqueness_of :email 
   validates_format_of :email, :with => /@/
-  validates :password, length: { minimum: 8 }
+  validates :password, length: { minimum: 8, allow_blank: true }
   
   after_initialize :set_role
   

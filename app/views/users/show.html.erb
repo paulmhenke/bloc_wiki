@@ -1,0 +1,15 @@
+<h1><%= @user.name %>'s Account</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <ul>
+    Email Address: <%= @user.email %>
+    Wikis Created: <%= @wikis.count %>
+    Account Plan: <%= @user.role %>
+    </ul>
+  </div>
+  
+  <div class='col-md-4'>
+    <%= link_to "Upgrade your Account", new_charge_path, class: 'btn btn-success' %>
+  </div>
+</div>
