@@ -7,29 +7,28 @@ class ChargesController < ApplicationController
     }
   end
   
-  def create #Creates a Stripe Customer object for associating with the charge
+  def create 
+    if current_user.customer_id.nil?
+      customer = Stripe::Customer.create(
+          email: current_user.email,
+          card: params[:stripeToken]
+        )
+        current_user.customer_id = customer.id
+    end
+      
     User.transaction do
       begin
-      customer = Stripe::Customer.create(
-        email: current_user.email,
-        card: params[:stripeToken]
-      )
-      
-      charge = Stripe::Charge.create(
-        customer: customer.id, 
-        amount: User::AMOUNT,
-        description: "Premium Blocipedia - #{current_user.email}",
-        currency: 'usd'
-      )
-      
+      customer = Stripe::Customer.retrieve(current_user.customer_id)
+      customer.subscriptions.create(plan: "premium")
+    
       flash[:success] = "Successful charge! Enjoy Blocipedia Premium!"
       current_user.update_attributes!(role: "premium")
       redirect_to wikis_path
       
-    rescue Stripe::CardError => e
+      rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to new_charge_path
+      end
     end
   end
-end
 end
