@@ -2,7 +2,7 @@ class WikisController < ApplicationController
 
   def index
     #will need to edit to account for public/private
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
     @user = current_user
   end
 
@@ -50,7 +50,7 @@ class WikisController < ApplicationController
   private
   
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :public)
+    params.require(:wiki).permit(:title, :body, :private)
   end
   
 end
