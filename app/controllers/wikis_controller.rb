@@ -2,7 +2,7 @@ class WikisController < ApplicationController
 
   def index
     #will need to edit to account for public/private
-    @wikis = Wiki.visible_to(user).group_by { |w| w.private? ? "private" : "public" }
+    @wikis = Wiki.visible_to(current_user).group_by { |w| w.private? ? "private" : "public" }
     @user = current_user
   end
 

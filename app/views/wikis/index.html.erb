@@ -23,7 +23,26 @@
       <div class='col-md-4'>
         <%= link_to "Add a New Wiki Entry", new_wiki_path, class: 'btn btn-success' %>
       </div>
+    </div>
+  </div>
+  
+  <div role="tabpanel" class="tab-pane active" id="private"> 
+    <div class="row" id="private">
+      <div class="col-md-8">
+        <% @wikis["private"].each do |wiki| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= link_to wiki.title, wiki %>
+              </h4>
+            </div>
+          </div>
+        <% end %>
+      </div>
       
+      <div class='col-md-4'>
+        <%= link_to "Add a New Wiki Entry", new_wiki_path, class: 'btn btn-success' %>
+      </div>
     </div>
   </div>
 </div>
