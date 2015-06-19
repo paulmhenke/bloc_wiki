@@ -3,7 +3,7 @@ require 'faker'
 member = User.create!(name: "Member User", email: "member@example.com", password: "helloworld", email_confirmed: true)
 member.save!  
 
-premium = User.create!(name: "Premium User", email: "premium@example.com", password: "helloworld", email_confirmed: true, role: "premium")
+premium = User.create!(name: "Premium User", email: "premium@example.com", password: "helloworld", email_confirmed: true, role: "premium", customer_id: "cus_6PRTdVrAqsAWOF")
 premium.save!
 
 admin = User.create!(name: "Admin", email: "admin@example.com", password: "helloworld", email_confirmed: true, role: "admin")

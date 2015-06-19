@@ -29,14 +29,20 @@
   <div role="tabpanel" class="tab-pane active" id="private"> 
     <div class="row" id="private">
       <div class="col-md-8">
-        <% @wikis["private"].each do |wiki| %>
-          <div class="media">
-            <div class="media-body">
-              <h4 class="media-heading">
-                <%= link_to wiki.title, wiki %>
-              </h4>
+        <% if @wikis["private"].nil? && @user.role == "standard" %>
+          <p>Upgrade your account to create Private wikis <%= link_to "Upgrade Now", new_charge_path, class: 'btn btn-success' %>
+        <% elsif @wikis["private"].nil? && (@user.role == "premium" || @user.role == "admin") %>
+          <p>You don't have any Private Wikis yet</p>
+        <% else %>
+          <% @wikis["private"].each do |wiki| %>
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <%= link_to wiki.title, wiki %>
+                </h4>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
       
