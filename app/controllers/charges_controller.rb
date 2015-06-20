@@ -38,7 +38,10 @@ require 'stripe'
     customer = Stripe::Customer.retrieve(current_user.customer_id)
     subscription = customer.subscriptions.data.first.id
     customer.subscriptions.retrieve(subscription).delete
+    
     current_user.update_attributes!(role: "standard")
+    current_user.private_to_public
+    
     redirect_to wikis_path
   end
     

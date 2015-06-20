@@ -26,6 +26,12 @@ class User < ActiveRecord::Base
     self.role ||= 'standard'
   end
   
+  def private_to_public
+    wikis.each do |wiki|
+      wiki.update_attributes(private: false)
+    end
+  end
+  
   def email_activate
     self.email_confirmed = true
     self.confirm_token = nil

@@ -13,7 +13,8 @@
     <% if @user.role == "standard" %>
       <%= link_to "Upgrade your Account", new_charge_path, class: 'btn btn-success' %>
     <% else %>
-      <%= link_to "Cancel Premium Access", charge_path(current_user), method: :delete, class: 'btn btn-danger' %>
+      <%= link_to "Cancel Premium Access", charge_path(current_user), method: :delete, class: 'btn btn-danger',
+          data: { confirm: "Your Private Wikis will be made Public if you cancel. Are you sure you want to cancel?" } %>
     <% end %>
   </div>
 </div>
