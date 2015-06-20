@@ -1,7 +1,7 @@
 <div class='row'>
   <div class='col-md-10'>
-    <h1><%= @wiki.title %></h1>
-    <p><%= @wiki.body %></p> 
+    <h1><%= markdown_to_html @wiki.title %></h1>
+    <p><%= markdown_to_html @wiki.body %></p> 
   </div>
 
   <div class='col-md-2'>

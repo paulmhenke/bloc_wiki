@@ -20,10 +20,6 @@
     <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: "Enter article contents here" %>
   <% end %>
   
-  <div class="form-group">
-    <%= f.submit "Submit Article", class: 'btn btn-success' %>
-  </div>
-  
   <% if current_user.role == 'admin' || current_user.role == 'premium' %>
     <div class="form-group">
       <%= f.label :private, class: 'checkbox' do %>
@@ -31,4 +27,8 @@
       <% end %>
     </div>
   <% end %>
+  
+  <div class="form-group">
+    <%= f.submit "Submit Article", class: 'btn btn-success' %>
+  </div>
 <% end %>
