@@ -15,7 +15,8 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = current_user.wikis.new(wiki_params) #creates collaboration
+    @wiki.owner = current_user #sets owner
     if @wiki.save
       redirect_to wikis_path, notice: "Your wiki was saved successfully."
     else flash[:error] = "There was an error. Please try again."

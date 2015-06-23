@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   AMOUNT = 20_00
   has_secure_password
   before_create :confirmation_token
-  has_many :wikis
+  has_many :wikis, through: :collaborations
+  has_many :owned_wikis, class_name: "Wiki", foreign_key: :owner_id
     
   validates_uniqueness_of :email 
   validates_format_of :email, :with => /@/

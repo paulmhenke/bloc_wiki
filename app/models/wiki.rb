@@ -1,5 +1,7 @@
 class Wiki < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :owner, class_name: "User"
+  has_many :collaborations
+  has_many :users, through: :collaborations
   
   #scope :visible_to, -> (user) { user && user.standard? ? where(private: false) : where(private: false) && where(user_id: user.id) }
   # return wikis that are public OR wikis that are private and belong to the user
