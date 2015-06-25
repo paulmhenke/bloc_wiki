@@ -1,7 +1,6 @@
 class WikisController < ApplicationController
 
   def index
-    #will need to edit to account for public/private
     @wikis = Wiki.visible_to(current_user).group_by { |w| w.private? ? "private" : "public" }
     @user = current_user
   end
@@ -15,7 +14,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.new(wiki_params) #creates collaboration
+    @wiki = Wiki.new(wiki_params) #? current_user.wikis.new(wiki_params) #creates collaboration
     @wiki.owner = current_user #sets owner
     if @wiki.save
       redirect_to wikis_path, notice: "Your wiki was saved successfully."
@@ -27,6 +26,7 @@ class WikisController < ApplicationController
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
+    @collaborators = @wiki.users #?
   end
   
   def update

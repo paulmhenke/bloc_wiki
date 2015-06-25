@@ -10,12 +10,17 @@ admin = User.create!(name: "Admin", email: "admin@example.com", password: "hello
 admin.save!
     
 10.times do
-  Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, user_id: member.id, private: false)
+  Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, owner_id: member.id, private: false)
 end
 
 5.times do
-  Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, user_id: premium.id, private: true)
+  Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, owner_id: premium.id, private: true)
 end
+
+Collaboration.create!(user_id: 2, wiki_id: 1)
+Collaboration.create!(user_id: 2, wiki_id: 2)
+Collaboration.create!(user_id: 2, wiki_id: 3)
 
 puts "Seed Finished"
 puts "#{Wiki.count} wikis created"
+puts "#{Collaboration.count} collaborations created"

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   before_create :confirmation_token
   has_many :wikis, through: :collaborations
   has_many :owned_wikis, class_name: "Wiki", foreign_key: :owner_id
+  has_many :collaborations
     
   validates_uniqueness_of :email 
   validates_format_of :email, :with => /@/
@@ -32,7 +33,8 @@ class User < ActiveRecord::Base
       wiki.update_attributes(private: false)
     end
   end
-  
+
+# USER AUTHENTICATION FROM SCRATCH METHODS
   def email_activate
     self.email_confirmed = true
     self.confirm_token = nil
