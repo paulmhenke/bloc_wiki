@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    record.owner == user || user.admin?
   end
 
   def scope
