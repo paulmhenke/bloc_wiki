@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   rescue_from Pundit::NotAuthorizedError do |exception|
-    redirect_to root_url, alert: exeption.message
+    redirect_to root_url, alert: exception.message
   end
   
 

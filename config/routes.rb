@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   end
   resources :sessions
   resources :password_resets
-  resources :wikis
+  resources :wikis do
+    member do
+      put :add_collaborator
+    end
+  end
+  
   resources :charges, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

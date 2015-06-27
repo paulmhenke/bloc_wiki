@@ -17,9 +17,9 @@ end
   Wiki.create!(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, owner_id: premium.id, private: true)
 end
 
-Collaboration.create!(user_id: 2, wiki_id: 1)
-Collaboration.create!(user_id: 2, wiki_id: 2)
-Collaboration.create!(user_id: 2, wiki_id: 3)
+Collaboration.create!(user_id: 1, wiki_id: 11)
+Collaboration.create!(user_id: 1, wiki_id: 12)
+Collaboration.create!(user_id: 1, wiki_id: 13)
 
 puts "Seed Finished"
 puts "#{Wiki.count} wikis created"

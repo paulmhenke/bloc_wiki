@@ -5,7 +5,22 @@
     <%= render partial: 'form', locals: { wiki: @wiki } %>
   </div>
   <div class="col-md-4">
-    <p><%= @collaborators %></p>
-    /* user a form_tag helper and a collection select helper to choose a new collaborator (make this update via ajax if possible)*/
+    
+    <h4>Collaborators</h4>
+    <ul>
+    <% @collaborators.each do |collaborator| %>
+      <li><%= collaborator.email %></li>
+    <% end %>
+    </ul>
+    
+    <% if @wiki.owner == current_user %>
+      <%= form_tag(add_collaborator_wiki_path(@wiki), method: :put) do %>
+        <div class='form-group'>
+          <%= select_tag "collaborator_id", options_from_collection_for_select(User.where.not(id: current_user.id).all, "id", "name") %>
+        </div>
+        <%= submit_tag "Add Collaborator", class: 'btn btn-default' %>
+      <% end %>
+    <% end %>
+    
   </div>
 </div> 

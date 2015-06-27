@@ -7,6 +7,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
@@ -14,7 +15,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params) #? current_user.wikis.new(wiki_params) #creates collaboration
+    @wiki = current_user.wikis.new(wiki_params) #creates collaboration
     @wiki.owner = current_user #sets owner
     if @wiki.save
       redirect_to wikis_path, notice: "Your wiki was saved successfully."
@@ -26,7 +27,8 @@ class WikisController < ApplicationController
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    @collaborators = @wiki.users #?
+    @collaborators = @wiki.users 
+    @owner = @wiki.owner
   end
   
   def update
@@ -36,6 +38,14 @@ class WikisController < ApplicationController
     else flash[:error] = "There was an error updating. Please try again."
       render :edit
     end
+  end
+  
+  def add_collaborator
+    @wiki = Wiki.find(params[:id])
+    @collaborator = User.find(params[:collaborator_id])
+    @wiki.users << @collaborator
+    flash[:notice] = "#{@collaborator.name} has been added as a collaborator."
+    redirect_to edit_wiki_path(@wiki)
   end
   
   def destroy
