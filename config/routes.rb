@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :wikis do
     member do
-      put :add_collaborator
+      put :add_collaborator, :remove_collaborator
     end
   end
   

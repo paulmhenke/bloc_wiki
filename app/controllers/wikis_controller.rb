@@ -40,14 +40,6 @@ class WikisController < ApplicationController
     end
   end
   
-  def add_collaborator
-    @wiki = Wiki.find(params[:id])
-    @collaborator = User.find(params[:collaborator_id])
-    @wiki.users << @collaborator
-    flash[:notice] = "#{@collaborator.name} has been added as a collaborator."
-    redirect_to edit_wiki_path(@wiki)
-  end
-  
   def destroy
     @wiki = Wiki.find(params[:id])
     if @wiki.destroy
@@ -58,6 +50,21 @@ class WikisController < ApplicationController
     end
   end
   
+  def add_collaborator
+    @wiki = Wiki.find(params[:id])
+    @collaborator = User.find(params[:collaborator_id])
+    @wiki.users << @collaborator
+    flash[:notice] = "#{@collaborator.name} has been added as a collaborator."
+    redirect_to edit_wiki_path(@wiki)
+  end
+  
+  def remove_collaborator
+    @wiki = Wiki.find(params[:id])
+    @collaborator = User.find(params[:collaborator_id])
+    @wiki.users.delete(@collaborator)
+    flash[:notice] = "#{@collaborator.name} has been removed as a collaborator."
+    redirect_to edit_wiki_path(@wiki)
+  end
   private
   
   def wiki_params
