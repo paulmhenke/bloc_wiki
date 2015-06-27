@@ -19,5 +19,9 @@ class Wiki < ActiveRecord::Base
     end
   end
   
+  def public?
+    !private?
+  end
+  
   
 end

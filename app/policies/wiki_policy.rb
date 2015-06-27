@@ -1,14 +1,10 @@
 class WikiPolicy < ApplicationPolicy
-  
+
   def show?
-    if user.role == 'admin'
-      true
-    elsif user.role == 'premium'
-      not record.private? || record.owner == user || record.users.include?(user)
-    else
-      not record.private? || record.users.include?(user)
-    end
+      user.admin? || (user.premium? && (record.public? || record.owner == user || record.users.include?(user))) || (user.standard? && (record.public? || record.users.include?(user)))
   end
+  
+
       
 
 =begin
@@ -27,7 +23,7 @@ class WikiPolicy < ApplicationPolicy
       elsif user.role == 'premium'
         all_wikis = scope.all
         all_wikis.each do |wiki|
-          if not wiki.public? || wiki.owner == user || wiki.users.include?(user)
+          if not wiki.private? || wiki.owner == user || wiki.users.include?(user)
             wikis << wiki # if the user is premium, only show them public wikis, or that private wikis they created, or private wikis they are a collaborator on
           end
         end
