@@ -70,6 +70,17 @@
               </div>
             </div>
           <% end %>
+          <% @collaborations.each do |collaboration| %>
+            <% if collaboration.user_id == @user.id %>
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <%= link_to wiki.title, wiki %>
+                </h4>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
       

@@ -4,6 +4,7 @@ class WikisController < ApplicationController
     @wikis = Wiki.visible_to(current_user).group_by { |w| w.private? ? "private" : "public" }
     @user = current_user
     @collab_wikis = @user.wikis
+    @collaborations = Collaboration.all
   end
 
   def show
