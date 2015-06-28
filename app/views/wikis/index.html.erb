@@ -2,6 +2,7 @@
 <ul class="nav nav-tabs" role="tablist">
   <li role="presentation" class="active"><a href="#public" aria-controls="public" role="tab" data-toggle="tab">Public</a></li>
   <li role="presentation"><a href="#private" aria-controls="private" role="tab" data-toggle="tab">Private</a></li>
+  <li role="presentation"><a href="#collab" aria-controls="collab" role="tab" data-toggle="tab">Collaborations</a></li>
 </ul>
   
   
@@ -35,6 +36,32 @@
           <p>You don't have any Private Wikis yet</p>
         <% else %>
           <% @wikis["private"].each do |wiki| %>
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <%= link_to wiki.title, wiki %>
+                </h4>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <div class='col-md-4'>
+        <%= link_to "Add a New Wiki Entry", new_wiki_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+  
+  <div role="tabpanel" class="tab-pane" id="collab"> 
+    <div class="row" id="collab">
+      <div class="col-md-8">
+        <% if @collab_wikis.nil? && @user.role == "standard" %>
+          <p>Upgrade your account to add Collaborators to your wikis <%= link_to "Upgrade Now", new_charge_path, class: 'btn btn-success' %>
+        <% elsif @collab_wikis.nil? && (@user.role == "premium" || @user.role == "admin") %>
+          <p>You don't have any Collaborative Wikis yet</p>
+        <% else %>
+          <% @collab_wikis.each do |wiki| %>
             <div class="media">
               <div class="media-body">
                 <h4 class="media-heading">
