@@ -70,17 +70,18 @@
               </div>
             </div>
           <% end %>
-          <% @collaborations.each do |collaboration| %>
-            <% if collaboration.user_id == @user.id %>
+        <% end %>
+          <% @collaborations.each do |collaboration| if collaboration.wiki.owner == @user %>
+            
             <div class="media">
               <div class="media-body">
                 <h4 class="media-heading">
-                  <%= link_to collaboration.wiki.title, wiki %> #? not sure why I can't call title on this
+                  <%= link_to collaboration.wiki.title, collaboration.wiki %>
                 </h4>
               </div>
             </div>
-            <% end %>
           <% end %>
+          
         <% end %>
       </div>
       
