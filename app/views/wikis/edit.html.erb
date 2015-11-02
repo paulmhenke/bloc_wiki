@@ -10,13 +10,14 @@
     <ul>
     <% @collaborators.each do |collaborator| %>
       <li><%= collaborator.email %></li>
+      <li><%= link_to "Remove Collaborator", remove_collaborator_wiki_path(@wiki, collaborator_id: collaborator.id), method: :put, class: 'btn btn-danger' %></li>
     <% end %>
     </ul>
     
     <% if @wiki.owner == current_user %>
       <%= form_tag(add_collaborator_wiki_path(@wiki), method: :put) do %>
         <div class='form-group'>
-          <%= select_tag "collaborator_id", options_from_collection_for_select(User.where.not(id: current_user.id).all, "id", "name") %>
+          <%= select_tag "collaborator_id", options_from_collection_for_select(User.where.not(id: @wiki.collaborator_ids).all, "id", "name") %>
         </div>
         <%= submit_tag "Add Collaborator", class: 'btn btn-default' %>
       <% end %>

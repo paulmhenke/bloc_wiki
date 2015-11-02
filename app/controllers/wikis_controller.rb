@@ -61,10 +61,11 @@ class WikisController < ApplicationController
   end
   
   def remove_collaborator
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.find(params[:id]) 
     @collaborator = User.find(params[:collaborator_id])
-    @wiki.users.delete(@collaborator)
-    flash[:notice] = "#{@collaborator.name} has been removed as a collaborator."
+    @collaboration = Collaboration.where(user_id: @collaborator, wiki_id: @wiki)
+    
+    flash[:notice] = "#{@collaborator.name} has been removed as a collaborator." if @collaboration && @collaboration.destroy #?
     redirect_to edit_wiki_path(@wiki)
   end
   private
